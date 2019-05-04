@@ -10,6 +10,9 @@ package service;
  * @author Edson
  */
 public class Snake {
+    static public void Mover(){
+        System.out.println("Mova!");
+    }
     static public void ComerLetra(){
         System.out.println("Comer letra!");
     }

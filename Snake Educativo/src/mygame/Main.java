@@ -6,6 +6,8 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
+import model.GameConfig;
+import model.Snake;
 
 /**
  * This is the Main Class of your Game. You should only do initialization here.
@@ -21,18 +23,21 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
-        Box b = new Box(1, 1, 1);
-        Geometry geom = new Geometry("Box", b);
-
-        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        mat.setColor("Color", ColorRGBA.Blue);
-        geom.setMaterial(mat);
+        Snake s = new Snake(assetManager);
+        Geometry geom = s.getGeo();
 
         rootNode.attachChild(geom);
     }
 
     @Override
     public void simpleUpdate(float tpf) {
+        GameConfig.segundo += tpf;
+        
+        if (GameConfig.segundo>1-GameConfig.speed*0.1){
+            GameConfig.score += GameConfig.segundo;
+            GameConfig.segundo = 0.0f;
+            service.Snake.Mover();
+        }
         //TODO: add update code
     }
 
